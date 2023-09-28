@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     public boolean up, down, left, right,attack;
-    public String direction;
+    public String direction="down";
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -40,7 +40,6 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        direction="down";
         switch (keyCode) {
             case KeyEvent.VK_W:
                 
@@ -67,7 +66,6 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
         
     }
     

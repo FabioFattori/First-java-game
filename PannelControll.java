@@ -16,7 +16,11 @@ public class PannelControll extends JPanel implements Runnable{
     final int ScreenSizeX = tileSize*maxTileX;
     final int ScreenSizeY = tileSize*maxTileY;
 
-    Player player = new Player(tileSize);
+    Bullet b;
+
+    
+
+    Player player = new Player(tileSize,new Bow());
 
     Thread gameThread;
 
@@ -71,39 +75,23 @@ public class PannelControll extends JPanel implements Runnable{
 
     }
 
+
+    
+    
+
+    
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
 
 
-        g2d.setColor(Color.white);
+
+
+        player.redraw(g2d,keyHandler);
+
 
         
-
-        g2d.fillRect(player.x, player.y, player.tileSize, player.tileSize);
-
-        if(keyHandler.attack){
-            g2d.setColor(Color.red);
-            switch (keyHandler.direction) {
-                case "up":
-                    g2d.fillRect(player.x, player.y-30, player.tileSize, player.tileSize);
-                    break;
-                case "down":
-                    g2d.fillRect(player.x, player.y+30, player.tileSize, player.tileSize);
-                    break;
-                case "left":
-                    g2d.fillRect(player.x-30, player.y, player.tileSize, player.tileSize);
-                    break;
-                case "right":
-                    g2d.fillRect(player.x+30, player.y, player.tileSize, player.tileSize);
-                    break;
-            
-                default:
-                    break;
-            }   
-        }
-
-        g2d.dispose();
+        
     }
 }
