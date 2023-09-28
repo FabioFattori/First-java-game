@@ -66,6 +66,8 @@ public class PannelControll extends JPanel implements Runnable{
             player.x += player.speed;
         }
 
+        
+
 
     }
 
@@ -80,6 +82,27 @@ public class PannelControll extends JPanel implements Runnable{
         
 
         g2d.fillRect(player.x, player.y, player.tileSize, player.tileSize);
+
+        if(keyHandler.attack){
+            g2d.setColor(Color.red);
+            switch (keyHandler.direction) {
+                case "up":
+                    g2d.fillRect(player.x, player.y-30, player.tileSize, player.tileSize);
+                    break;
+                case "down":
+                    g2d.fillRect(player.x, player.y+30, player.tileSize, player.tileSize);
+                    break;
+                case "left":
+                    g2d.fillRect(player.x-30, player.y, player.tileSize, player.tileSize);
+                    break;
+                case "right":
+                    g2d.fillRect(player.x+30, player.y, player.tileSize, player.tileSize);
+                    break;
+            
+                default:
+                    break;
+            }   
+        }
 
         g2d.dispose();
     }
