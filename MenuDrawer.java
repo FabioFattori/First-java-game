@@ -17,4 +17,10 @@ public abstract class MenuDrawer {
         g.setColor(Color.RED);
         g.drawString("Game Over", 100, 100);
     }
+
+    static void drawTextPrompt(String text,Graphics2D g){
+        g.setColor(Color.white);
+        
+        g.drawString(text, 100, 100);
+    }
 }

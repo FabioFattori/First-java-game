@@ -29,6 +29,11 @@ public class PannelControll extends JPanel implements Runnable{
 
     Thread gameThread;
     Graphics2D g2d;
+    int fps = 60;
+    int frameCount = 0;
+    boolean changeControll = true;
+
+    ChangeWeapongArea changeWeaponArea = new ChangeWeapongArea(100,100,100,100);
 
     public KeyHandler keyHandler = new KeyHandler();
 
@@ -72,6 +77,17 @@ public class PannelControll extends JPanel implements Runnable{
     }
 
     public void update(){
+        frameCount++;
+
+        if(changeWeaponArea.isPlayerInArea(player)){
+            this.changeWeaponArea.canChangeWeapon = true;
+        }
+
+        if(keyHandler.changeWeapon&&changeWeaponArea.canChangeWeapon&&changeControll){
+            changeWeaponArea.changeWeapon(player);
+            changeWeaponArea.canChangeWeapon = false;
+            changeControll = false;
+        }
 
         if(keyHandler.up&&player.y-player.speed>0){
             player.y -= player.speed;
@@ -103,7 +119,12 @@ public class PannelControll extends JPanel implements Runnable{
         }
     
         
+        
 
+
+        if(frameCount%fps==0){
+            changeControll=true;
+        }
 
     }
 
@@ -128,6 +149,14 @@ public class PannelControll extends JPanel implements Runnable{
         }
         zombie.redraw(g2d);
         }
+
+        if(changeWeaponArea.isPlayerInArea(player)){
+            MenuDrawer.drawTextPrompt("Press E to change weapon", g2d);
+        }
+
+        
+            changeWeaponArea.draw(g2d);
+        
 
         
         g2d.dispose();

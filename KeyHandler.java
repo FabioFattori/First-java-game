@@ -3,7 +3,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean up, down, left, right,attack;
+    public boolean up, down, left, right,attack,changeWeapon;
+
     public String direction="down";
 
     @Override
@@ -29,6 +30,9 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_SPACE:
                 attack=true;
+                break;
+            case KeyEvent.VK_E:
+                changeWeapon=true;
                 break;
         
             default:
@@ -56,6 +60,9 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_SPACE:
                 attack=false;
+                break;
+            case KeyEvent.VK_E:
+                changeWeapon=false;
                 break;
         
             default:
