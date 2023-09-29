@@ -22,6 +22,8 @@ public class PannelControll extends JPanel implements Runnable{
 
     Player player = new Player(tileSize,new Bow());
 
+    Zombie zombie = new Zombie(100, 10, 2, 200, 200, tileSize);
+
     Thread gameThread;
 
     public KeyHandler keyHandler = new KeyHandler();
@@ -70,6 +72,16 @@ public class PannelControll extends JPanel implements Runnable{
             player.x += player.speed;
         }
 
+        if(zombie.x  - 40 >= player.x ){
+            zombie.Attack("left");
+        }else if(zombie.x +40 <= player.x){
+            zombie.Attack("right");
+        }else if(zombie.y - 40 >= player.y ){
+            zombie.Attack("up");
+        }else if(zombie.y + 40<= player.y ){
+            zombie.Attack("down");
+        }
+            zombie.MoveInDirectionOfPlayer(player);
         
 
 
@@ -90,6 +102,10 @@ public class PannelControll extends JPanel implements Runnable{
 
         player.redraw(g2d,keyHandler);
 
+        if(zombie._isAttacking){
+            zombie.drawAttack(g2d);
+        }
+        zombie.redraw(g2d);
 
         
         

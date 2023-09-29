@@ -1,5 +1,5 @@
-public class Bow extends Weapon{
+public class Bow extends RangedWeapon{
     Bow(){
-        super(5, 50,true,600,20);
+        super(5, 50,600,20);
     }
 }

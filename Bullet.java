@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 
@@ -25,21 +24,21 @@ public class Bullet{
         switch(direction)
         {
             case "up":
-                currentX = x;
+                currentX = x +20;
                 currentY = y - (speed * fpsPassed);
                 break;
             case "down":
 
-                currentX = x;
+                currentX = x +20;
                 currentY = y + (speed * fpsPassed);
                 break;
             case "left":
                 currentX = x - speed * fpsPassed;
-                currentY = y;
+                currentY = y+20;
                 break;
             case "right":
                 currentX = x + speed * fpsPassed;
-                currentY = y;
+                currentY = y +20;
                 break;
             default:
 

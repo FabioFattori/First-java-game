@@ -44,7 +44,7 @@ public class Player {
 
         g2d.fillRect(x, y, tileSize, tileSize);
 
-        if(!weapon.isRanged)
+        if(!(this.weapon instanceof RangedWeapon))
         {
             if(keyHandler.attack && !_isPressingAttack && _attackingTime <= 0)
             {
