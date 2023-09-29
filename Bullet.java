@@ -49,7 +49,7 @@ public class Bullet{
 
         g2d.fillRect(currentX, currentY, tileSize, tileSize);
 
-        g2d.dispose();     
+           
    } 
 
 }

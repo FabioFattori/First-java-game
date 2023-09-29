@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -20,11 +22,13 @@ public class PannelControll extends JPanel implements Runnable{
 
     
 
-    Player player = new Player(tileSize,new Bow());
+    Player player = new Player(tileSize,new HeavySword());
 
-    Zombie zombie = new Zombie(100, 10, 2, 200, 200, tileSize);
+    List<Zombie> zombies;
+
 
     Thread gameThread;
+    Graphics2D g2d;
 
     public KeyHandler keyHandler = new KeyHandler();
 
@@ -43,9 +47,18 @@ public class PannelControll extends JPanel implements Runnable{
     @Override
     public void run() {
 
+        zombies = new ArrayList<Zombie>();
+        for(int i=0;i<10;i++){
+            zombies.add(i, new Zombie(100,10,2,(int)(Math.random()*ScreenSizeX),(int)(Math.random()*ScreenSizeY),tileSize));
+        }
+
 
         while(this.gameThread != null){
             
+            if(player.health <= 0){
+                this.gameThread = null;
+            }
+
             update();
             repaint();
 
@@ -55,6 +68,7 @@ public class PannelControll extends JPanel implements Runnable{
                 e.printStackTrace();
             }
         }
+        MenuDrawer.drawGameOver(this.g2d);
     }
 
     public void update(){
@@ -72,16 +86,22 @@ public class PannelControll extends JPanel implements Runnable{
             player.x += player.speed;
         }
 
-        if(zombie.x  - 40 >= player.x ){
-            zombie.Attack("left");
-        }else if(zombie.x +40 <= player.x){
-            zombie.Attack("right");
-        }else if(zombie.y - 40 >= player.y ){
-            zombie.Attack("up");
-        }else if(zombie.y + 40<= player.y ){
-            zombie.Attack("down");
-        }
+        
+
+
+        for (Zombie zombie : zombies) {
+            if(zombie.x  - 40 >= player.x ){
+                zombie.Attack("left");
+            }else if(zombie.x +40 <= player.x){
+                zombie.Attack("right");
+            }else if(zombie.y - 40 >= player.y ){
+                zombie.Attack("up");
+            }else if(zombie.y + 40<= player.y ){
+                zombie.Attack("down");
+            }
             zombie.MoveInDirectionOfPlayer(player);
+        }
+    
         
 
 
@@ -95,19 +115,21 @@ public class PannelControll extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D) g;
+        this.g2d = (Graphics2D) g;
 
-
+        MenuDrawer.drawTopLeftMenu(g2d,player);
 
 
         player.redraw(g2d,keyHandler);
 
-        if(zombie._isAttacking){
+        for (Zombie zombie : zombies) {
+            if(zombie._isAttacking){
             zombie.drawAttack(g2d);
         }
         zombie.redraw(g2d);
+        }
 
         
-        
+        g2d.dispose();
     }
 }

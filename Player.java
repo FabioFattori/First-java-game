@@ -6,6 +6,7 @@ public class Player {
     int y;
     int tileSize;
     int speed;
+    int health = 100;
     Weapon weapon;
 
     
