@@ -1,4 +1,5 @@
 import java.awt.Graphics2D;
+import java.util.List;
 import java.awt.Color;
 
 public class Player {
@@ -7,13 +8,12 @@ public class Player {
     int tileSize;
     int speed;
     int health = 100;
+    List<Weapon> inventory=new java.util.ArrayList<Weapon>();
     Weapon weapon;
 
     
     Player(int tileSize){
-        this.tileSize = tileSize;
-        this.x = 100;
-        this.y = 100;
+        this(tileSize,100,100);
         this.speed = 3;
         this.weapon = new Pugni();
     }
@@ -24,12 +24,14 @@ public class Player {
         this.y = y;
         this.speed = 3;
         this.weapon = new Pugni();
+        inventory.add(new Pugni());
+        inventory.add(new HeavySword());
+        inventory.add(new Bow());
     }
 
     Player(int tileSize,Weapon w){
-        this.tileSize = tileSize;
-        this.x = 100;
-        this.y = 100;
+        this(tileSize,100,100);
+        
         this.speed = 3;
         this.weapon = w;
     }

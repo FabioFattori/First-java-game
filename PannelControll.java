@@ -32,6 +32,7 @@ public class PannelControll extends JPanel implements Runnable{
     int fps = 60;
     int frameCount = 0;
     boolean changeControll = true;
+    InventoryHandler InventoryHandler = new InventoryHandler(player.inventory, this);
 
     ChangeWeapongArea changeWeaponArea = new ChangeWeapongArea(100,100,100,100);
 
@@ -53,7 +54,7 @@ public class PannelControll extends JPanel implements Runnable{
     public void run() {
 
         zombies = new ArrayList<Zombie>();
-        for(int i=0;i<10;i++){
+        for(int i=0;i<0;i++){
             zombies.add(i, new Zombie(100,10,2,(int)(Math.random()*ScreenSizeX),(int)(Math.random()*ScreenSizeY),tileSize));
         }
 
@@ -122,9 +123,13 @@ public class PannelControll extends JPanel implements Runnable{
         
 
 
-        if(frameCount%fps==0){
+        if(frameCount%fps==1){
             changeControll=true;
+            
         }
+
+        InventoryHandler.update();
+       
 
     }
 
@@ -156,6 +161,8 @@ public class PannelControll extends JPanel implements Runnable{
 
         
             changeWeaponArea.draw(g2d);
+
+        InventoryHandler.draw(g2d);
         
 
         

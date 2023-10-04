@@ -27,6 +27,8 @@ public class ChangeWeapongArea {
             p.weapon = new Bow();
         }else if(p.weapon instanceof Bow){
             p.weapon = new HeavySword();
+        }else{
+            p.weapon = new HeavySword();
         }
     }
 
